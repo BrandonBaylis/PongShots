@@ -27,11 +27,11 @@ public class Ball : MonoBehaviour
 
         if (randomNumber <= 0.5)
         {
-            rb.AddForce(new Vector2(10, ballSpeed));
+            rb.AddForce(new Vector2(130, ballSpeed));
         }
         else
         {
-            rb.AddForce(new Vector2(-10, -ballSpeed));
+            rb.AddForce(new Vector2(-130, -ballSpeed));
         }
     }
 
@@ -48,7 +48,7 @@ public class Ball : MonoBehaviour
         }
     }
 
-    private void ResetBall()
+    public void ResetBall()
     {
         //Reset ball position and velocity to 0
         rb.velocity = new Vector2(0, 0);
