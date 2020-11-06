@@ -210,6 +210,8 @@ MonoBehaviour:
   Player1: {fileID: 556428159}
   Player2: {fileID: 2128585002}
   scoreSkin: {fileID: 11400000, guid: 5123606ac84dcb64aa96c7d9287aaa96, type: 2}
+  Player1Object: {fileID: 556428157}
+  Player2Object: {fileID: 2128584997}
 --- !u!82 &515366247
 AudioSource:
   m_ObjectHideFlags: 0
@@ -490,6 +492,7 @@ MonoBehaviour:
   speed: {x: 0.1, y: 0}
   moveLeft: 97
   moveRight: 100
+  pullBack: 115
   moveDirection: 0
 --- !u!61 &556428161
 BoxCollider2D:
@@ -1436,6 +1439,7 @@ MonoBehaviour:
   speed: {x: 0.1, y: 0}
   moveLeft: 276
   moveRight: 275
+  pullBack: 274
   moveDirection: 0
 --- !u!61 &2128584999
 BoxCollider2D:
