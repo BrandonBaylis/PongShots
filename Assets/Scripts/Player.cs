@@ -29,8 +29,8 @@ public class Player : MonoBehaviour
     public void SetClampY(float passedY)
     {
         minY = passedY;
-        maxY = passedY * 1.5f;
-        Debug.Log(gameObject.name + " " + maxY);
+        maxY = passedY * 1.12f;
+        Debug.Log(gameObject.name + " MaxY:" + maxY + ", MinY:" + minY);
     }
 
     // Update is called once per frame
@@ -56,7 +56,15 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(pullBack))
         {
-            rb.position = new Vector2(rb.position.x, Mathf.Clamp(rb.position.y, minY, maxY));
+            if (gameObject.name == "Player1")
+            {
+                rb.position = new Vector2(rb.position.x, Mathf.Clamp(rb.position.y, maxY, minY));
+            }
+            else if (gameObject.name == "Player2")
+            {
+                rb.position = new Vector2(rb.position.x, Mathf.Clamp(rb.position.y, minY, maxY));
+            }
+
             rb.MovePosition(new Vector2(rb.position.x, rb.position.y * 1.01f));
         }
     }
