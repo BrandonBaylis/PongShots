@@ -15,9 +15,6 @@ public class GameManager : MonoBehaviour
 
     public GUISkin scoreSkin;
 
-    public GameObject Player1Object;
-    public GameObject Player2Object;
-
     //Declare score variables and set them to 0
     public static int player1Score = 0;
 
@@ -47,9 +44,6 @@ public class GameManager : MonoBehaviour
         //Moves the players to starting positions
         Player1.transform.position = new Vector2(Player1.transform.position.x, mainCamera.ScreenToWorldPoint(new Vector3(0f, 75f, 0f)).y);
         Player2.transform.position = new Vector2(Player2.transform.position.x, mainCamera.ScreenToWorldPoint(new Vector3(0f, Screen.height - 75f, 0f)).y);
-
-        Player1Object.GetComponent<Player>().SetClampY(Player1.transform.position.y);
-        Player2Object.GetComponent<Player>().SetClampY(Player2.transform.position.y);
     }
 
     public static void Score(string goalName)

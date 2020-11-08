@@ -40,7 +40,7 @@ public class Ball : MonoBehaviour
         if (colInfo.collider.tag == "Player")
         {
             Vector3 rbVelocity = rb.velocity;
-            rbVelocity.x = rb.velocity.x * (Random.Range(0.7f, 1.1f)) + colInfo.collider.GetComponent<Player>().moveDirection / 2;
+            rbVelocity.x = rb.velocity.x * (Random.Range(0.7f, 1.1f)) + colInfo.collider.GetComponent<Player>().movementX * 18f;
             rb.velocity = rbVelocity;
             audioData = GetComponent<AudioSource>();
             audioData.pitch = Random.Range(0.85f, 1.15f);

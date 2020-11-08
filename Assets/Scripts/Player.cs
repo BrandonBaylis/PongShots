@@ -1,71 +1,87 @@
-﻿using System.Runtime.CompilerServices;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public Vector2 speed;
+    private Rigidbody2D rb2d;
+    private float speedX = 0.1f;
+    private float speedY = 0.1f;
 
-    public KeyCode moveLeft;
-    public KeyCode moveRight;
-    public KeyCode pullBack;
+    private int playerNum;
 
-    public float moveDirection;
+    public Camera mainCamera;
 
-    //Min and Max player x movement positions
-    private float minX;
+    public float movementX;
+    public float movementY;
 
-    private float maxX;
-
-    private float minY;
-    private float maxY;
-
-    public void Start()
+    private void Awake()
     {
-        minX = Camera.main.ScreenToWorldPoint(new Vector3(0 + 55, 0)).x;
-        maxX = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width - 55, 0)).x;
+        rb2d = gameObject.GetComponent<Rigidbody2D>();
+
+        //Assigns player number primarily for control schemes
+        if (gameObject.name == "Player1")
+        {
+            playerNum = 1;
+        }
+        else if (gameObject.name == "Player2")
+        {
+            playerNum = 2;
+        }
     }
 
-    public void SetClampY(float passedY)
+    //Clamp y-axis movement between two points
+    private void ClampPositionY(ref float yPosition)
     {
-        minY = passedY;
-        maxY = passedY * 1.12f;
-        Debug.Log(gameObject.name + " MaxY:" + maxY + ", MinY:" + minY);
+        float minY;
+        float maxY;
+
+        //Min & max dependant on Player 1 (bottom of screen) and Player 2 (top of screen)
+        if (gameObject.name == "Player1")
+        {
+            //Player 1 clamps
+            minY = mainCamera.ScreenToWorldPoint(new Vector2(0f, 75f)).y;
+            maxY = minY * 1.12f;
+            yPosition = Mathf.Clamp(yPosition, maxY, minY);
+        }
+        else
+        {
+            //Player 2 clamps
+            minY = mainCamera.ScreenToWorldPoint(new Vector2(0f, Screen.height - 75f)).y;
+            maxY = minY * 1.12f;
+            //Clamp reference float between min/max
+            yPosition = Mathf.Clamp(yPosition, minY, maxY);
+        }
+    }
+
+    //Clamp x-axis movement between screen borders
+    private void ClampPositionX(ref float xPosition)
+    {
+        //Min & max between camera borders
+        float minX = mainCamera.ScreenToWorldPoint(new Vector2(0 + 50, 0)).x;
+        float maxX = mainCamera.ScreenToWorldPoint(new Vector2(Screen.width - 50, 0)).x;
+
+        //Clamp reference float between min/max
+        xPosition = Mathf.Clamp(xPosition, minX, maxX);
     }
 
     // Update is called once per frame
     public void FixedUpdate()
     {
-        //Movement code
-        if (Input.GetKey(moveRight))
-        {
-            rb.position = new Vector2(Mathf.Clamp(rb.position.x, minX, maxX), rb.position.y);
-            rb.MovePosition(rb.position + speed);
-            moveDirection = 5f;
-        }
-        else if (Input.GetKey(moveLeft))
-        {
-            rb.position = new Vector2(Mathf.Clamp(rb.position.x, minX, maxX), rb.position.y);
-            rb.MovePosition(rb.position - speed);
-            moveDirection = -5f;
-        }
-        else
-        {
-            moveDirection = 0f;
-        }
+        //Movement speed equals the Player's input value * x-axis speed
+        movementX = Input.GetAxisRaw("Horizontal" + playerNum) * speedX;
 
-        if (Input.GetKey(pullBack))
-        {
-            if (gameObject.name == "Player1")
-            {
-                rb.position = new Vector2(rb.position.x, Mathf.Clamp(rb.position.y, maxY, minY));
-            }
-            else if (gameObject.name == "Player2")
-            {
-                rb.position = new Vector2(rb.position.x, Mathf.Clamp(rb.position.y, minY, maxY));
-            }
+        movementY = Input.GetAxisRaw("Vertical" + playerNum) * speedY;
 
-            rb.MovePosition(new Vector2(rb.position.x, rb.position.y * 1.01f));
-        }
+        //Target position equals current position + movement amount
+        float targetXPosition = rb2d.position.x + movementX;
+
+        float targetYPosition = rb2d.position.y + movementY;
+        Debug.Log(gameObject.name + " " + targetYPosition);
+
+        //Clamp x-axis movement between screen width
+        ClampPositionX(ref targetXPosition);
+
+        ClampPositionY(ref targetYPosition);
+
+        rb2d.MovePosition(new Vector2(targetXPosition, targetYPosition));
     }
 }
