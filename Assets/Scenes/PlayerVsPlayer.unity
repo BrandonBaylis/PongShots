@@ -207,11 +207,7 @@ MonoBehaviour:
   wallRight: {fileID: 1030800332}
   goalBottom: {fileID: 1950977082}
   goalTop: {fileID: 1099385754}
-  Player1: {fileID: 556428159}
-  Player2: {fileID: 2128585002}
   scoreSkin: {fileID: 11400000, guid: 5123606ac84dcb64aa96c7d9287aaa96, type: 2}
-  Player1Object: {fileID: 556428157}
-  Player2Object: {fileID: 2128584997}
 --- !u!82 &515366247
 AudioSource:
   m_ObjectHideFlags: 0
@@ -489,7 +485,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 519420031}
-  moveDirection: 0
+  movementX: 0
+  movementY: 0
 --- !u!61 &556428161
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -528,10 +525,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -843,7 +840,7 @@ Transform:
   m_GameObject: {fileID: 1443261520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -973,7 +970,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.16666667
+  m_Radius: 0.17
 --- !u!50 &1443261526
 Rigidbody2D:
   serializedVersion: 4
@@ -1432,7 +1429,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 519420031}
-  moveDirection: 0
+  movementX: 0
+  movementY: 0
 --- !u!61 &2128584999
 BoxCollider2D:
   m_ObjectHideFlags: 0

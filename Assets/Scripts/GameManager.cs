@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,9 +9,6 @@ public class GameManager : MonoBehaviour
     public BoxCollider2D goalBottom;
     public BoxCollider2D goalTop;
 
-    public Transform Player1;
-    public Transform Player2;
-
     public GUISkin scoreSkin;
 
     //Declare score variables and set them to 0
@@ -21,7 +17,7 @@ public class GameManager : MonoBehaviour
     public static int player2Score = 0;
 
     // Update is called every frame
-    private void Start()
+    private void Awake()
     {
         ScreenSize();
     }
@@ -40,10 +36,6 @@ public class GameManager : MonoBehaviour
 
         goalBottom.size = new Vector2(mainCamera.ScreenToWorldPoint(new Vector3(Screen.width * 2f, 0f, 0f)).x, 1f);
         goalBottom.offset = new Vector2(0f, mainCamera.ScreenToWorldPoint(new Vector3(0f, Screen.height, 0f)).y + 0.5f);
-
-        //Moves the players to starting positions
-        Player1.transform.position = new Vector2(Player1.transform.position.x, mainCamera.ScreenToWorldPoint(new Vector3(0f, 75f, 0f)).y);
-        Player2.transform.position = new Vector2(Player2.transform.position.x, mainCamera.ScreenToWorldPoint(new Vector3(0f, Screen.height - 75f, 0f)).y);
     }
 
     public static void Score(string goalName)
