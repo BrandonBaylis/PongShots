@@ -2,7 +2,7 @@
 Pong but you can smack ball real good
 
 
-##TO-DO
+### TO-DO
 
 :black_square_button: Fix-up ball trail
 
