@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     private int playerNum;
 
     private readonly float speedX = 0.1f;    //x-axis movement "speed" amount
-    private readonly float speedY = 0.1f;    //y-axis movement "speed" amount
+    private readonly float speedY = 0.04f;    //y-axis movement "speed" amount
 
     public float movementX;
     public float movementY;
@@ -79,10 +79,12 @@ public class Player : MonoBehaviour
         if (Input.GetAxisRaw("Vertical" + playerNum) != 0f)
         {
             movementY = Input.GetAxisRaw("Vertical" + playerNum) * speedY;
+            //Attempt at exponential pullback
+            //movementY = Input.GetAxisRaw("Vertical" + playerNum) * Mathf.Lerp(speedY, speedY + 0.05f, 0.001f);
         }
         else
         {
-            movementY = rb2D.position.y * -speedY;
+            movementY = rb2D.position.y * (-speedY * 0.8f);
         }
 
         //Target position equals current position + movement amount

@@ -27,11 +27,11 @@ public class Ball : MonoBehaviour
 
         if (randomNumber <= 0.5)
         {
-            rb.AddForce(new Vector2(130, ballSpeed));
+            rb.AddForce(new Vector2(150, ballSpeed));
         }
         else
         {
-            rb.AddForce(new Vector2(-130, -ballSpeed));
+            rb.AddForce(new Vector2(-150, -ballSpeed));
         }
     }
 
